@@ -1,0 +1,6 @@
+module Pods_RNCompare {
+  umbrella header "Pods-RNCompare-umbrella.h"
+
+  export *
+  module * { export * }
+}
