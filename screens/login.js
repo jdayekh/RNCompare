@@ -1,21 +1,18 @@
+import React, { Component } from "react";
 import {
-  AppRegistry,
-  Button,
-  Keyboard,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import React, {Component} from 'react';
+} from "react-native";
 
-import {StackNavigator} from 'react-navigation';
+import { StackNavigator } from "react-navigation";
 
-const login = (props, {navigation}) => {
-  const [errorMessage, setErrorMessage] = React.useState('');
-  const [userEmail, setUserEmail] = React.useState('');
-  const [userPassword, setUserPassword] = React.useState('');
+const login = (props, { navigation }) => {
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [userEmail, setUserEmail] = React.useState("");
+  const [userPassword, setUserPassword] = React.useState("");
 
   const txtEmailHandler = (enteredEmail) => {
     setUserEmail(enteredEmail);
@@ -26,22 +23,21 @@ const login = (props, {navigation}) => {
   const handleLogin = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (userEmail == '') {
-      setErrorMessage('Please enter an Email address');
-    } else if (userPassword == '') {
-      setErrorMessage('Please enter a Password');
+    if (userEmail == "") {
+      setErrorMessage("Please enter an Email address");
+    } else if (userPassword == "") {
+      setErrorMessage("Please enter a Password");
     } else {
       const apiUrl =
-        'https://portal.mayasoftapps.com/backoffice/rnjay/login.php?email=' +
+        "https://portal.mayasoftapps.com/backoffice/rnjay/login.php?email=" +
         userEmail +
-        '&password=' +
+        "&password=" +
         userPassword;
-      console.log(apiUrl);
       fetch(apiUrl, {
-        method: 'post',
+        method: "post",
         header: {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
+          Accept: "application/json",
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           email: userEmail,
@@ -50,11 +46,11 @@ const login = (props, {navigation}) => {
       })
         .then((response) => response.json())
         .then((responseJson) => {
-          if (responseJson == 'ok') {
+          if (responseJson == "ok") {
             // redirect to profile page
-            props.navigation.navigate('Profile');
+            props.navigation.navigate("Profile");
           } else {
-            alert('Wrong Login Details');
+            alert("Wrong Login Details");
           }
         })
         .catch((error) => {
@@ -72,7 +68,7 @@ const login = (props, {navigation}) => {
         style={{
           width: 250,
           margin: 10,
-          borderColor: '#333',
+          borderColor: "#333",
           borderWidth: 1,
           borderRadius: 5,
           fontSize: 20,
@@ -86,7 +82,7 @@ const login = (props, {navigation}) => {
         style={{
           width: 250,
           margin: 10,
-          borderColor: '#333',
+          borderColor: "#333",
           borderWidth: 1,
           borderRadius: 5,
           fontSize: 20,
@@ -99,7 +95,7 @@ const login = (props, {navigation}) => {
         <Text style={styles.title}>Submit</Text>
       </TouchableOpacity>
 
-      <Text style={{padding: 10, margin: 10, color: 'red'}}>
+      <Text style={{ padding: 10, margin: 10, color: "red" }}>
         {errorMessage}
       </Text>
     </View>
@@ -110,16 +106,16 @@ export default login;
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   pageTitle: {
     fontSize: 20,
     margin: 15,
     color: global.dark_gray,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 30,
     marginBottom: 30,
   },
@@ -129,48 +125,23 @@ const styles = StyleSheet.create({
     color: global.background_color,
     height: 50,
     padding: 5,
-    fontWeight: 'bold',
-  },
-
-  title_two: {
-    fontSize: 20,
-    color: global.dark_gray,
-    height: 50,
-    padding: 5,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 
   submit: {
-    width: '55%',
+    width: "55%",
     fontSize: 20,
     color: global.dark_gray,
     height: 50,
     padding: 5,
     paddingTop: 20,
-    fontWeight: 'bold',
-    justifyContent: 'center',
-    alignItems: 'center',
+    fontWeight: "bold",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: global.primary_color,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
-    marginBottom: 10,
-  },
-
-  submit_two: {
-    width: '65%',
-    fontSize: 20,
-    color: global.dark_gray,
-    height: 50,
-    padding: 5,
-    paddingTop: 20,
-    fontWeight: 'bold',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: global.secondary_color,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: "#fff",
     marginBottom: 10,
   },
 });

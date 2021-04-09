@@ -1416,6 +1416,8 @@ drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_dark
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
+drawable node_modules_reactnavigation_stack_src_views_assets_backicon
+drawable node_modules_reactnavigation_stack_src_views_assets_backiconmask
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -1915,6 +1917,7 @@ raw amu_poly_style_boolean_numeric
 raw amu_unknwown_folder
 raw amu_unsupported
 raw amu_visibility_ground_overlay
+raw app
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

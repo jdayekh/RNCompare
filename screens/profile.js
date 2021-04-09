@@ -1,40 +1,32 @@
 import {
-  AppRegistry,
-  Button,
   Dimensions,
-  ScrollView,
   StyleSheet,
   Text,
   View,
-} from 'react-native';
+} from "react-native";
 import MapView, {
   Callout,
   MapContainer,
   Marker,
   PROVIDER_GOOGLE,
-} from 'react-native-maps';
-import React, {Component, useState} from 'react';
+} from "react-native-maps";
+import React, { Component, useEffect, useState } from "react";
 
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from "@react-native-community/geolocation";
 
-const profile = (props, {navigation}) => {
-  const [lat, setLat] = React.useState('');
-  const [lng, setLng] = React.useState('');
+const profile = (props, { navigation }) => {
+  const [lat, setLat] = React.useState(0);
+  const [lng, setLng] = React.useState(0);
 
   Geolocation.getCurrentPosition(
     (pos) => {
-      console.log('pos -> ', pos);
-      console.log('Position.latitude -> ', pos.coords.latitude);
-      console.log('Position.longitude -> ', pos.coords.longitude);
-      setLat(pos.coords.latitude);
-      setLng(pos.coords.longitude);
-      console.log('xxx: ' + lat);
-      console.log('xxx: ' + lng);
+      setLat(parseFloat(pos.coords.latitude));
+      setLng(parseFloat(pos.coords.longitude));
     },
-    (error) => console.log(error),
+    (error) => console.log(error)
   );
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [position, setPosition] = useState({
     latitude: 0,
     longitude: 0,
@@ -44,8 +36,8 @@ const profile = (props, {navigation}) => {
     <View style={styles.container}>
       <MapView
         initialRegion={{
-          latitude: 37.421998333333335,
-          longitude: -122.08400000000002,
+          latitude: lat,
+          longitude: lng,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -57,14 +49,15 @@ const profile = (props, {navigation}) => {
           width,
           height,
         }}
-        loadingEnabled={true}>
+        loadingEnabled={true}
+      >
         <Marker
           coordinate={{
-            latitude: 37.421998333333335,
-            longitude: -122.08400000000002,
+            latitude: lat,
+            longitude: lng,
           }}
-          title="Flatiron School Atlanta"
-          description="This is where the magic happens!"
+          title="Device Location"
+          description="This is the device location!"
         />
       </MapView>
     </View>
@@ -73,18 +66,18 @@ const profile = (props, {navigation}) => {
 
 export default profile;
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
-const map_width = '110%';
-const map_height = '100%';
-const width_proportion_left = '95%';
+const map_width = "110%";
+const map_height = "100%";
+const width_proportion_left = "95%";
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   map: {
@@ -93,47 +86,8 @@ const styles = StyleSheet.create({
     height,
   },
 
-  pageName: {
-    margin: 10,
-    fontWeight: 'bold',
-    color: '#000',
-    textAlign: 'center',
-  },
 
-  containerMap: {
-    width: map_width,
-    marginHorizontal: 5,
-    height: Dimensions.get('window').width / 2, // approximate a square
-  },
-  // Callout bubble
-  bubble: {
-    flexDirection: 'column',
-    alignSelf: 'flex-start',
-    backgroundColor: '#fff',
-    borderRadius: 6,
-    borderColor: '#ccc',
-    borderWidth: 0.5,
-    paddingTop: 3,
-    paddingBottom: 3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: 200,
-  },
-  // Arrow below the bubble
-  arrow: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#fff',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -32,
-  },
-  arrowBorder: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#007a87',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -0.5,
-  },
+
+
+
 });
